@@ -11,9 +11,7 @@ namespace assignment {
       return n;
     }
 
-    // Напишите здесь свой код ...
-
-    return 0;
+    return round((pow((1 + sqrt(5)) / 2, n) - pow((1 - sqrt(5)) / 2, n)) / sqrt(5));
   }
 
   int64_t fib_iterative(int n) {
@@ -25,17 +23,22 @@ namespace assignment {
     // буфер для хранения двух последних значения ряда Фибоначчи
     int64_t fib_prev = 0;
     int64_t fib_curr = 1;
+    int64_t tmp;
 
-    // Напишите здесь свой код ...
+    for (int i = 2; i <= n; i++) {
+      tmp = fib_curr;
+      fib_curr = fib_prev + fib_curr;
+      fib_prev = tmp;
+    }
 
-    return 0;
+    return fib_curr;
   }
 
   int64_t fib_recursive(int n) {
-
-    // Напишите здесь свой код ...
-
-    return 0;
+    if (n <= 1) {
+      return n;
+    }
+    return fib_recursive(n - 1) + fib_recursive(n - 2);
   }
 
   int64_t fib_recursive_memoization(int n, std::vector<int64_t>& cache) {
@@ -45,13 +48,12 @@ namespace assignment {
     }
 
     if (cache[n] != -1) {
-      // Напишите здесь свой код ...
-      return 0;
+      return cache[n];
     }
 
-    // Напишите здесь свой код ...
+    cache[n] = fib_recursive_memoization(n - 2, cache) + fib_recursive_memoization(n - 1, cache);
+    return cache[n];
 
-    return 0;
   }
 
   int64_t fib_matrix(int n) {
@@ -60,11 +62,8 @@ namespace assignment {
       return n;
     }
 
-    // Напишите здесь свой код ...
-
-    // Tip: используйте реализованную функцию matrix_pow
-
-    return 0;
+    Matrix2x2 fibm = matrix_power(FibMatrix, n);
+    return fibm[0][1];
   }
 
 }  // namespace assignment
